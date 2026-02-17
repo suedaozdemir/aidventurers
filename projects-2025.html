@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en" data-bs-theme="auto">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Projects 2025 | Aidventurers</title>
+
+  <meta name="description" content="Aidventurers 2025 projects: clean water, healthcare access, and sustainable livelihoods." />
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"/>
+
+  <link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900&display=swap" rel="stylesheet"/>
+
+  <style>
+    body{ background-color:#e5d7ca !important; }
+
+    /* Header brand */
+    .blog-header-logo{ font-family:'Playfair Display',serif; font-size:2.4rem; font-weight:900; line-height:1.1; }
+    .blog-header-logo span{ display:block; font-size:1rem; font-weight:500; opacity:.75; white-space:nowrap; margin-top:6px; }
+
+    /* Top menu */
+    .av-nav{ position:relative; padding:10px 0; }
+    .av-nav::before,.av-nav::after{
+      content:""; position:absolute; left:0; right:0; height:2px;
+      background:rgba(0,0,0,.55); border-radius:2px;
+    }
+    .av-nav::before{ top:0; } .av-nav::after{ bottom:0; }
+
+    .av-nav .av-nav-inner{
+      position:relative; display:flex; align-items:center; justify-content:space-between;
+      width:100%; padding:6px 18px; gap:0;
+    }
+    .av-nav .av-nav-inner::before,.av-nav .av-nav-inner::after{
+      content:""; position:absolute; top:50%; width:10px; height:10px;
+      border:2px solid rgba(0,0,0,.75); border-radius:50%;
+      transform:translateY(-50%); background:transparent;
+    }
+    .av-nav .av-nav-inner::before{ left:0; } .av-nav .av-nav-inner::after{ right:0; }
+
+    .av-link{
+      flex:1; text-align:center; padding:0;
+      font-family:'Playfair Display',serif; font-weight:700;
+      color:rgba(0,0,0,.78); text-decoration:none; white-space:nowrap;
+    }
+    .av-link:hover{ color:rgba(0,0,0,1); text-decoration:underline; text-underline-offset:4px; }
+
+    /* Dropdown */
+    .av-dropdown{ position:relative; flex:1; text-align:center; padding-bottom:10px; }
+    .av-dropdown-menu{
+      position:absolute; top:100%; left:50%; transform:translateX(-50%);
+      min-width:160px; background:#e5d7ca;
+      border:1px solid rgba(0,0,0,.15); border-radius:12px;
+      padding:8px; box-shadow:0 10px 24px rgba(0,0,0,.12);
+      opacity:0; visibility:hidden; transition:opacity .2s ease;
+      z-index:2000;
+    }
+    .av-dropdown:hover .av-dropdown-menu{ opacity:1; visibility:visible; }
+
+    .av-dropdown-item{
+      display:block; padding:10px 12px; border-radius:10px;
+      text-decoration:none; color:rgba(0,0,0,.85); font-weight:600; white-space:nowrap;
+    }
+    .av-dropdown-item:hover{ background:rgba(0,0,0,.06); }
+
+    /* Cards */
+    .proj-card{ background:rgba(255,255,255,.35); border:1px solid rgba(0,0,0,.08); border-radius:16px; }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <!-- Header (same vibe as home) -->
+    <header class="border-bottom lh-1 py-3 mb-2">
+      <div class="row flex-nowrap justify-content-between align-items-center">
+        <div class="col-4 d-flex align-items-center">
+          <a class="d-inline-flex align-items-center text-decoration-none" href="index.html" aria-label="Aidventurers Home">
+            <img src="aidventurers_logo.png" alt="Aidventurers logo" style="height:110px; width:auto;" />
+          </a>
+        </div>
+
+        <div class="col-4 text-center">
+          <a class="blog-header-logo text-body-emphasis text-decoration-none" href="index.html">
+            Aidventurers
+            <span class="d-block">Global Aid &amp; Youth Leadership</span>
+          </a>
+        </div>
+
+        <div class="col-4 d-flex justify-content-end align-items-center">
+          <a class="btn btn-sm btn-outline-secondary" href="index.html#subscribe">Subscribe</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Top nav -->
+    <nav class="av-nav mb-4" aria-label="Primary navigation">
+      <div class="av-nav-inner">
+        <a class="av-link" href="index.html">Home</a>
+
+        <div class="av-dropdown">
+          <a class="av-link" href="projects.html">Projects</a>
+          <div class="av-dropdown-menu" role="menu" aria-label="Projects submenu">
+            <a class="av-dropdown-item" href="projects-2025.html">2025</a>
+            <a class="av-dropdown-item" href="projects-2026.html">2026</a>
+          </div>
+        </div>
+
+        <a class="av-link" href="index.html#news">News</a>
+        <a class="av-link" href="index.html#get-involved">Get Involved</a>
+        <a class="av-link" href="index.html#about">About Us</a>
+      </div>
+    </nav>
+
+    <!-- Page content -->
+    <main class="pb-5">
+      <div class="mb-4">
+        <h1 class="display-5 fw-bold">Projects — 2025</h1>
+        <p class="lead mb-0">
+          Here we’ll share what we did in 2025: outcomes, photos, partners, and impact metrics.
+        </p>
+      </div>
+
+      <div class="row g-4">
+        <!-- Example card 1 -->
+        <div class="col-md-6">
+          <div class="proj-card p-4 h-100">
+            <h3 class="h4 mb-2">Uganda 2025 — Clean Water</h3>
+            <p class="mb-2">
+              Brief summary here (e.g., wells built, people served, maintenance training).
+            </p>
+            <ul class="mb-0">
+              <li>Impact: ___ people served</li>
+              <li>Location: Kampala / Jinja</li>
+              <li>Partners: ___</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Example card 2 -->
+        <div class="col-md-6">
+          <div class="proj-card p-4 h-100">
+            <h3 class="h4 mb-2">Uganda 2025 — Healthcare Access</h3>
+            <p class="mb-2">
+              Brief summary here (e.g., screenings, cataract surgeries, follow-up).
+            </p>
+            <ul class="mb-0">
+              <li>Surgeries funded: ___</li>
+              <li>Clinics: ___</li>
+              <li>Partners: ___</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-4">
+        <a class="btn btn-outline-dark" href="index.html">← Back to Home</a>
+      </div>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>

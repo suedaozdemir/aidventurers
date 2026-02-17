@@ -215,6 +215,62 @@ body {
   text-decoration: underline;
   text-underline-offset: 4px;
 }
+/* Dropdown container */
+.av-dropdown{
+  position: relative;
+  flex: 1;              /* Projects de diğerleri gibi eşit yer kaplasın */
+  text-align: center;
+}
+
+/* Submenu box */
+.av-dropdown-menu{
+  position: absolute;
+  top: 100%;
+margin-top: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 160px;
+  background: #e5d7ca;
+border: 1px solid rgba(0,0,0,.15);
+  border: 1px solid rgba(0,0,0,.15);
+  border-radius: 12px;
+  padding: 8px;
+  box-shadow: 0 10px 24px rgba(0,0,0,.12);
+  display: none;
+  z-index: 2000;
+}
+
+/* Show on hover (desktop) */
+.av-dropdown:hover .av-dropdown-menu{
+  display: block;
+}
+
+/* Items */
+.av-dropdown-item{
+  display: block;
+  padding: 10px 12px;
+  border-radius: 10px;
+  text-decoration: none;
+  color: rgba(0,0,0,.85);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.av-dropdown-item:hover{
+  background: rgba(0,0,0,.06);
+}
+
+/* Optional: tiny arrow under Projects */
+.av-dropdown-menu::before{
+  content:"";
+  position:absolute;
+  top:-8px;
+  left:50%;
+  transform: translateX(-50%);
+  border-left:8px solid transparent;
+  border-right:8px solid transparent;
+  border-bottom:8px solid rgba(255,255,255,0.96);
+}
 
 
   </style>
@@ -393,14 +449,23 @@ body {
 
 <nav class="av-nav my-2" aria-label="Primary navigation">
   <div class="av-nav-inner">
-    <a class="av-link" href="#home">Home</a>
-    <a class="av-link" href="#projects">Projects</a>
+    <a class="av-link" href="index.html">Home</a>
+
+    <div class="av-dropdown">
+      <a class="av-link av-dropdown-toggle" href="projects.html">Projects</a>
+      <div class="av-dropdown-menu" role="menu" aria-label="Projects submenu">
+        <a class="av-dropdown-item" href="projects-2025.html">2025</a>
+        <a class="av-dropdown-item" href="projects-2026.html">2026</a>
+      </div>
+    </div>
+
     <a class="av-link" href="#news">News</a>
+    <a class="av-link" href="#volunteer-stories">Volunteer Stories</a>
     <a class="av-link" href="#get-involved">Get Involved</a>
-    <a class="av-link" href="#our-volunteers">Our Volunteers</a>
     <a class="av-link" href="#about">About Us</a>
   </div>
 </nav>
+
 
   </div>
 
@@ -408,7 +473,7 @@ body {
     <!-- OUR MISSION -->
     <section class="mission-hero-img p-4 p-md-5 mb-4">
       <div class="content col-lg-8 px-0">
-        <h1 class="display-5 fw-bold">Our Mission</h1>
+        <h1 class="display-5 fw-bold">Mission & Vision</h1>
         <p class="lead my-3">
           Aidventurers empowers youth to deliver ethical, community-led aid around the world:
           healthcare access, clean water, and
@@ -435,57 +500,6 @@ body {
         </p>
       </div>
     </section>
-
-    <!-- HERO CAROUSEL -->
-    <div id="heroCarousel" class="carousel slide mb-4" data-bs-ride="carousel">
-      <div class="carousel-indicators">
-        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active" aria-current="true"></button>
-        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1"></button>
-        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2"></button>
-      </div>
-
-      <div class="carousel-inner rounded">
-        <div class="carousel-item active">
-          <img src="https://images.unsplash.com/photo-1509099836639-18ba1795216d?q=80&w=1600&auto=format&fit=crop" class="d-block w-100" alt="Clinic support">
-          <div class="carousel-caption text-start">
-            <h5>Healthcare Access</h5>
-            <p>Clinics, screenings, and cataract surgeries with local partners.</p>
-          </div>
-        </div>
-
-        <!-- Slide 2 -->
-        <div class="carousel-item" data-bs-interval="4500">
-          <img
-            src="https://images.unsplash.com/photo-1542370285-b8eb8317691a?q=80&w=1600&auto=format&fit=crop"
-            class="d-block w-100"
-            alt="Clean water well installation by Aidventurers"
-            style="height:520px; object-fit:cover;"
-            loading="lazy"
-          />
-          <div class="carousel-caption">
-            <h5>Clean Water</h5>
-            <p>Community wells and maintenance training for long-term access.</p>
-          </div>
-        </div>
-
-        <div class="carousel-item">
-          <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?q=80&w=1600&auto=format&fit=crop" class="d-block w-100" alt="Livelihood support">
-          <div class="carousel-caption text-end">
-            <h5>Livelihoods</h5>
-            <p>Goats and bicycles that boost household income and mobility.</p>
-          </div>
-        </div>
-      </div>
-
-      <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon"></span>
-        <span class="visually-hidden">Previous</span>
-      </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
-        <span class="carousel-control-next-icon"></span>
-        <span class="visually-hidden">Next</span>
-      </button>
-    </div>
 
     <div class="row mb-2">
       <div class="col-md-6">
@@ -646,5 +660,37 @@ body {
       });
     });
   </script>
+  <script>
+document.addEventListener('DOMContentLoaded', () => {
+  const dd = document.querySelector('.av-dropdown');
+  const toggle = document.querySelector('.av-dropdown-toggle');
+  const menu = document.querySelector('.av-dropdown-menu');
+  if (!dd || !toggle || !menu) return;
+
+  // only for touch-ish screens
+  let opened = false;
+
+  toggle.addEventListener('click', (e) => {
+    const isSmall = window.matchMedia('(max-width: 768px)').matches;
+    if (!isSmall) return; // desktop uses hover
+
+    if (!opened) {
+      e.preventDefault(); // first tap opens menu
+      menu.style.display = 'block';
+      opened = true;
+    }
+    // second tap follows link naturally
+  });
+
+  // close when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!dd.contains(e.target) && opened) {
+      menu.style.display = 'none';
+      opened = false;
+    }
+  });
+});
+</script>
+
 </body>
 </html>
