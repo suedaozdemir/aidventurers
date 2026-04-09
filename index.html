@@ -271,6 +271,49 @@ border: 1px solid rgba(0,0,0,.15);
   border-right:8px solid transparent;
   border-bottom:8px solid rgba(255,255,255,0.96);
 }
+/* Ana kapsayıcı: Tüm section'ı kaplar */
+.hero-full-section {
+  position: relative;
+  /* Videoyu kenarlardaki boşlukları aşacak şekilde genişletiyoruz */
+  width: 100vw;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  
+  min-height: 600px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  background: #000; /* Video yüklenene kadar siyah görünsün */
+}
+
+.hero-video-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+  filter: blur(8px) brightness(0.7); /* Metinler okunsun diye biraz kararttık */
+}
+
+.hero-overlay-content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+}
+
+.mission-vision-card {
+  background: rgba(229, 215, 202, 0.85); /* Arka plan rengine sadık kaldık */
+  backdrop-filter: blur(5px);
+  padding: 3rem;
+  border-radius: 2rem;
+  max-width: 550px;
+  margin-left: auto; /* Sağa yaslar */
+  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+}
 
 
   </style>
@@ -471,35 +514,48 @@ border: 1px solid rgba(0,0,0,.15);
 
   <main class="container">
     <!-- OUR MISSION -->
-    <section class="mission-hero-img p-4 p-md-5 mb-4">
-      <div class="content col-lg-8 px-0">
-        <h1 class="display-5 fw-bold">Mission & Vision</h1>
-        <p class="lead my-3">
-          Aidventurers empowers youth to deliver ethical, community-led aid around the world:
-          healthcare access, clean water, and
-          <strong>sustainable livelihoods</strong> while training the next generation of service leaders.
-        </p>
-        <p class="mb-0">
-          <a
-            href="https://www.embracerelief.org/donation/aidventurers-group-fundraising"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="btn btn-primary btn-lg"
-          >
-            Donate
-          </a>
+<!-- Container dışına aldık ve p-0 ekledik ki kenarlarda boşluk kalmasın -->
+<section class="container-fluid p-0 my-5">
+  <div class="hero-full-section shadow-lg">
+    <!-- Arka Plan Videosu -->
+    <video autoplay muted loop playsinline class="hero-video-bg">
+      <source src="girisvideo.mp4" type="video/mp4">
+    </video>
 
-          <a
-            href="https://forms.gle/WpcHMHpzXFaQDFBZ7"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="btn btn-primary btn-lg me-2"
-          >
-            Volunteer
-          </a>
-        </p>
+
+    <!-- İçerik Katmanı -->
+    <div class="hero-overlay-content">
+      <!-- Satırı container içine alıyoruz ki metinler sayfa düzenine sadık kalsın -->
+      <div class="container">
+        <div class="row w-100 m-0">
+          <div class="col-lg-6 d-none d-lg-block"></div>
+          <div class="col-lg-6">
+            <div class="mission-vision-card">
+              <h2 class="blog-header-logo fs-1 mb-4">Our Mission</h2>
+              <p class="lead mb-4 fw-medium">
+                Delivering ethical, community-driven global aid through healthcare, clean water, and sustainable livelihoods.
+              </p>
+              <h2 class="blog-header-logo fs-1 mb-4">Our Vision</h2>
+              <p class="lead mb-5 fw-medium">
+                Empowering youth leadership to build and sustain resilient communities worldwide.
+              </p>
+              
+              <div class="d-grid">
+    <a href="https://www.embracerelief.org/donation/aidventurers-group-fundraising" 
+       target="_blank" 
+       class="btn btn-bd-primary btn-lg rounded-pill py-3 fw-bold shadow">
+      Donate Now
+    </a>
+  </div>
+            
+          </div>
+        </div>
       </div>
-    </section>
+    </div>
+  </div>
+</section>
+
+
 
     <div class="row mb-2">
       <div class="col-md-6">
