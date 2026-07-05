@@ -1,751 +1,417 @@
-<!doctype html>
-<html lang="en" data-bs-theme="auto">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aidventurers — Global Aid & Youth Leadership</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --sand:#EAE0CB;
+    --sand-deep:#DDCEA9;
+    --ink:#211810;
+    --rust:#E0752F;
+    --rust-deep:#B85A20;
+    --savanna:#1E7A86;
+    --savanna-deep:#1B3A5C;
+    --ochre:#C89B2E;
+    --brick:#B23327;
+    --brown:#6B4226;
+    --gold:#F2B705;
+    --cream-card:#F6EEDB;
+    --line:rgba(33,24,16,0.14);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--sand); color:var(--ink); font-family:'Work Sans', sans-serif; overflow-x:hidden;}
+  h1,h2,h3{font-family:'Fraunces', serif; font-weight:600; letter-spacing:-0.01em;}
+  .eyebrow{font-family:'IBM Plex Mono', monospace; font-size:0.72rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--rust-deep);}
+  a{color:inherit;}
+  img{display:block; max-width:100%;}
 
-  <title>Aidventurers · Global Aid & Youth Leadership</title>
+  .weave-divider{
+    height:12px; width:100%;
+    background:repeating-linear-gradient(135deg, var(--rust) 0 10px, var(--ochre) 10px 20px, var(--savanna) 20px 30px, var(--brick) 30px 40px);
+    background-size:56px 56px; opacity:0.9;
+  }
 
-  <meta name="description"
-content="Aidventurers is a youth-led nonprofit delivering ethical, community-driven global aid — healthcare access, clean water, and sustainable livelihoods." />
+  /* ---------- nav ---------- */
+  nav{
+    position:sticky; top:0; z-index:50;
+    display:flex; justify-content:space-between; align-items:center;
+    padding:0.9rem 2.4rem;
+    background:rgba(243,230,201,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  .brand{display:flex; align-items:center; gap:0.7rem;}
+  .brand img{height:38px; width:auto;} /* drop your real logo file in as logo.png */
+  .brand-name{font-family:'Fraunces', serif; font-weight:700; font-size:1.15rem; line-height:1.1;}
+  .brand-tag{font-size:0.68rem; color:rgba(43,32,24,0.6); font-family:'IBM Plex Mono', monospace; letter-spacing:0.04em;}
+  nav ul{list-style:none; display:flex; gap:1.8rem; align-items:center;}
+  nav ul a{text-decoration:none; font-size:0.9rem; font-weight:500; color:var(--ink); opacity:0.85;}
+  nav ul a:hover{opacity:1;}
+  .nav-cta{background:var(--rust); color:var(--cream-card); padding:0.55rem 1.15rem; border-radius:2px; font-size:0.86rem; font-weight:600; text-decoration:none;}
 
+  /* ---------- fixed social rail ---------- */
+  .social-rail{
+    position:fixed; right:1.4rem; bottom:1.4rem; z-index:60;
+    display:flex; flex-direction:column; gap:0.6rem;
+  }
+  .social-rail a{
+    width:38px; height:38px; border-radius:50%;
+    background:var(--cream-card); border:1.5px solid var(--line);
+    display:flex; align-items:center; justify-content:center;
+    color:var(--ink); transition:transform 0.15s, background 0.15s;
+  }
+  .social-rail a:hover{background:var(--rust); color:var(--cream-card); transform:translateY(-2px);}
+  .social-rail svg{width:18px; height:18px;}
 
-  <link rel="canonical" href="https://aidventurers.org/" />
+  /* ---------- hero ---------- */
+  .hero{position:relative; padding:6rem 2.4rem 0; text-align:center; overflow:hidden;}
+  .hero .eyebrow{display:block; margin-bottom:1.2rem;}
+  .hero h1{font-size:clamp(2.4rem, 5.5vw, 4.6rem); line-height:1.04; max-width:18ch; margin:0 auto 1.3rem;}
+  .hero h1 em{font-style:italic; color:var(--rust);}
+  .hero p{max-width:50ch; margin:0 auto 2.2rem; font-size:1.06rem; line-height:1.55; color:rgba(43,32,24,0.78);}
+  .hero-ctas{display:flex; gap:0.9rem; justify-content:center; margin-bottom:3rem; flex-wrap:wrap;}
+  .btn{padding:0.85rem 1.6rem; border-radius:2px; font-weight:600; font-size:0.94rem; text-decoration:none; display:inline-block; border:1.5px solid transparent;}
+  .btn-primary{background:var(--rust); color:var(--cream-card);}
+  .btn-primary:hover{background:var(--rust-deep);}
+  .btn-ghost{border-color:var(--ink); color:var(--ink);}
+  .btn-ghost:hover{background:var(--ink); color:var(--sand);}
 
-  <meta property="og:title" content="Aidventurers · Global Aid & Youth Leadership" />
-  <meta property="og:description" content="Youth-led, community-driven aid: healthcare, clean water, and sustainable livelihoods." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://aidventurers.org/" />
-  <meta property="og:image" content="https://aidventurers.org/aidventurers_logo.png" />
+  .caravan-wrap{position:relative; height:150px; margin-top:0.5rem;}
+  .horizon{position:absolute; left:0; right:0; bottom:34px; height:1px; background:var(--line);}
+  .caravan-track{position:absolute; bottom:22px; left:0; display:flex; align-items:flex-end; white-space:nowrap; will-change:transform;}
+  .figure-wrap{width:46px; flex-shrink:0; margin-right:-11px;}
+  .figure-wrap:nth-child(3n+1){transform:translateY(-7px);}
+  .figure-wrap:nth-child(5n+2){transform:translateY(-3px);}
+  .figure-wrap svg{width:100%; height:auto; display:block;}
+  .caravan-ground{position:absolute; left:0; right:0; bottom:0; height:34px; background:linear-gradient(180deg, transparent, var(--sand-deep));}
 
-  <meta name="theme-color" content="#712cf9" />
+  section{padding:5.2rem 2.4rem;}
+  .section-inner{max-width:1120px; margin:0 auto;}
+  .reveal{opacity:0; transform:translateY(18px); transition:opacity 0.7s ease, transform 0.7s ease;}
+  .reveal.in{opacity:1; transform:translateY(0);}
 
-  <script src="../assets/js/color-modes.js"></script>
+  /* ---------- mission/vision ---------- */
+  .mission{background:var(--cream-card);}
+  .mv-grid{display:grid; grid-template-columns:1fr 1fr; gap:2.5rem;}
+  .mv-card{padding:0.5rem 0;}
+  .mv-card .eyebrow{display:block; margin-bottom:0.6rem;}
+  .mv-card h2{font-size:1.7rem; margin-bottom:0.8rem;}
+  .mv-card p{font-size:1rem; line-height:1.6; color:rgba(43,32,24,0.8);}
 
-  <link
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-    rel="stylesheet"
-    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
-    crossorigin="anonymous"
-  />
+  /* ---------- projects ---------- */
+  .projects{background:var(--sand);}
+  .projects-head{text-align:center; margin-bottom:2.8rem;}
+  .projects-head .eyebrow{display:block; margin-bottom:0.6rem;}
+  .projects-head h2{font-size:clamp(1.9rem,3.2vw,2.5rem);}
+  .card-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem;}
+  .card{background:var(--cream-card); border:1px solid var(--line); border-radius:4px; padding:1.8rem 1.6rem; position:relative; overflow:hidden;}
+  .card::before{content:''; position:absolute; top:0; left:0; right:0; height:5px;}
+  .card.c1::before{background:var(--rust);} .card.c2::before{background:var(--savanna);} .card.c3::before{background:var(--ochre);}
+  .card-tag{font-family:'IBM Plex Mono', monospace; font-size:0.68rem; letter-spacing:0.08em; text-transform:uppercase; padding:0.2rem 0.55rem; border-radius:10px; display:inline-block; margin-bottom:0.9rem;}
+  .card.c1 .card-tag{background:rgba(193,80,46,0.13); color:var(--rust-deep);}
+  .card.c2 .card-tag{background:rgba(63,91,65,0.13); color:var(--savanna-deep);}
+  .card.c3 .card-tag{background:rgba(217,155,43,0.16); color:#8a621a;}
+  .card h3{font-size:1.15rem; margin-bottom:0.5rem;}
+  .card p{font-size:0.9rem; line-height:1.55; color:rgba(43,32,24,0.75); margin-bottom:0.9rem;}
+  .card ul{list-style:none; font-size:0.85rem; color:rgba(43,32,24,0.7); display:flex; flex-direction:column; gap:0.3rem;}
+  .card ul li{padding-left:1rem; position:relative;}
+  .card ul li::before{content:'—'; position:absolute; left:0; color:rgba(43,32,24,0.4);}
+  .card.coming{display:flex; flex-direction:column; align-items:flex-start; justify-content:center; border-style:dashed; opacity:0.85;}
 
-  <link
-    href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900&display=swap"
-    rel="stylesheet"
-  />
-  <link href="blog.css" rel="stylesheet" />
+  /* ---------- news ---------- */
+  .news{background:var(--cream-card);}
+  .news-head{display:flex; justify-content:space-between; align-items:baseline; margin-bottom:2.2rem; flex-wrap:wrap; gap:0.8rem;}
+  .news-head h2{font-size:clamp(1.7rem,3vw,2.2rem);}
+  .news-item{display:grid; grid-template-columns:200px 1fr; gap:1.6rem; padding:1.6rem 0; border-top:1px solid var(--line); align-items:center;}
+  .news-item img{border-radius:4px; width:100%; height:130px; object-fit:cover; background:var(--sand-deep);}
+  .news-date{font-family:'IBM Plex Mono', monospace; font-size:0.72rem; color:rgba(43,32,24,0.55); margin-bottom:0.35rem;}
+  .news-item h3{font-size:1.1rem; margin-bottom:0.45rem;}
+  .news-item p{font-size:0.9rem; line-height:1.55; color:rgba(43,32,24,0.75);}
+  .news-item a{font-size:0.85rem; font-weight:600; color:var(--rust-deep); text-decoration:none;}
 
-  <!-- ✅ MOVED your style block into the real head -->
-  <style>
-    .bd-placeholder-img {
-      font-size: 1.125rem;
-      text-anchor: middle;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      user-select: none;
-    }
-    @media (min-width: 768px) {
-      .bd-placeholder-img-lg {
-        font-size: 3.5rem;
-      }
-    }
-    .b-example-divider {
-      width: 100%;
-      height: 3rem;
-      background-color: #0000001a;
-      border: solid rgba(0, 0, 0, 0.15);
-      border-width: 1px 0;
-      box-shadow:
-        inset 0 0.5em 1.5em #0000001a,
-        inset 0 0.125em 0.5em #00000026;
-    }
-    .b-example-vr {
-      flex-shrink: 0;
-      width: 1.5rem;
-      height: 100vh;
-    }
-    .bi {
-      vertical-align: -0.125em;
-      fill: currentColor;
-    }
-    .nav-scroller {
-      position: relative;
-      z-index: 2;
-      height: 2.75rem;
-      overflow-y: hidden;
-    }
-    .nav-scroller .nav {
-      display: flex;
-      flex-wrap: nowrap;
-      padding-bottom: 1rem;
-      margin-top: -1px;
-      overflow-x: auto;
-      text-align: center;
-      white-space: nowrap;
-      -webkit-overflow-scrolling: touch;
-    }
-    .btn-bd-primary {
-      --bd-violet-bg: #712cf9;
-      --bd-violet-rgb: 112.520718, 44.062154, 249.437846;
-      --bs-btn-font-weight: 600;
-      --bs-btn-color: var(--bs-white);
-      --bs-btn-bg: var(--bd-violet-bg);
-      --bs-btn-border-color: var(--bd-violet-bg);
-      --bs-btn-hover-color: var(--bs-white);
-      --bs-btn-hover-bg: #6528e0;
-      --bs-btn-hover-border-color: #6528e0;
-      --bs-btn-focus-shadow-rgb: var(--bd-violet-rgb);
-      --bs-btn-active-color: var(--bs-btn-hover-color);
-      --bs-btn-active-bg: #5a23c8;
-      --bs-btn-active-border-color: #5a23c8;
-    }
-    .bd-mode-toggle {
-      z-index: 1500;
-    }
-    .bd-mode-toggle .bi {
-      width: 1em;
-      height: 1em;
-    }
-    .bd-mode-toggle .dropdown-menu .active .bi {
-      display: block !important;
-    }
-    @media (max-width: 576px) {
-      .blog-header-logo { font-size: 1rem; }
-    }
-    .mission-hero-img {
-      position: relative;
-      overflow: hidden;
-      border-radius: .75rem;
-      color: #fff;
-      isolation: isolate;
-    }
-    .mission-hero-img::before {
-      content: "";
-      position: absolute; inset: 0;
-      background: url("firstpic.jpg") center/cover no-repeat;
-      filter: blur(2px);
-      transform: scale(1.06);
-      z-index: -2;
-    }
-    .mission-hero-img::after {
-      content: ""; position: absolute; inset: 0;
-      background: linear-gradient(180deg, rgba(0,0,0,.35), rgba(0,0,0,.28));
-      z-index: -1;
-    }
-    .mission-hero-img > .content {
-      position: relative;
-      z-index: 0;
-      -webkit-font-smoothing: antialiased;
-      text-rendering: optimizeLegibility;
-    }
-    .mission-hero-img h1 { text-shadow: 0 2px 10px rgba(0,0,0,.35); }
-    .mission-hero-img p  { text-shadow: 0 1px 6px rgba(0,0,0,.30); }
-    .mission-hero-img .btn-outline-primary {
-      --bs-btn-color: #fff; --bs-btn-border-color: #fff;
-      --bs-btn-hover-bg: rgba(255,255,255,.15);
-      --bs-btn-hover-border-color: #fff;
-    }
-    /* Global Background */
-body {
-  background-color: #e5d7ca !important;
-}
+  /* ---------- volunteer ---------- */
+  .volunteer{background:var(--savanna-deep); color:var(--sand);}
+  .vol-grid{display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:center;}
+  .volunteer .eyebrow{color:var(--ochre);}
+  .volunteer h2{color:var(--sand); font-size:clamp(1.9rem,3.2vw,2.5rem); margin:0.7rem 0 1.1rem;}
+  .volunteer p{color:rgba(243,230,201,0.82); line-height:1.6; margin-bottom:1.4rem;}
+  .vol-list{list-style:none; display:flex; flex-direction:column; gap:0.9rem;}
+  .vol-list li{display:flex; gap:0.7rem; font-size:0.95rem; color:rgba(243,230,201,0.9);}
+  .vol-list span{color:var(--ochre); font-weight:700;}
+  .volunteer .btn-primary{background:var(--rust);}
 
-/* Stronger brand hierarchy */
-.blog-header-logo {
-  font-family: 'Playfair Display', serif;
-  font-size: 3.5rem;   /* Bigger Aidventurers */
-  font-weight: 900;    /* More bold */
-  line-height: 1.1;
-}
+  /* ---------- gallery ---------- */
+  .gallery{background:var(--sand);}
+  .gallery-grid{display:grid; grid-template-columns:repeat(4,1fr); grid-auto-rows:150px; gap:0.7rem;}
+  .gallery-grid div{background:var(--sand-deep); border-radius:3px; display:flex; align-items:center; justify-content:center; font-family:'IBM Plex Mono', monospace; font-size:0.7rem; color:rgba(43,32,24,0.4);}
+  .gallery-grid div:nth-child(1){grid-column:span 2; grid-row:span 2;}
+  .gallery-grid div:nth-child(6){grid-column:span 2;}
 
-.blog-header-logo span {
-  font-size: 1.8rem;  /* Smaller tagline */
-  font-weight: 400;    /* Lighter weight */
-  opacity: 0.75;
-  letter-spacing: 0.5px;
-  white-space: nowrap;  /* 🔥 forces single line */
-  margin-top: 6px;
-}
- 
-/* Clickable top menu like your mockup */
-.av-nav {
-  position: relative;
-  padding: 10px 0;
-}
+  /* ---------- donate ---------- */
+  .donate{background:var(--ink); color:var(--sand); text-align:center;}
+  .donate .eyebrow{color:var(--ochre); text-align:center; display:block;}
+  .donate h2{font-size:clamp(2rem,4vw,2.8rem); margin:1rem 0 1.2rem; color:var(--sand);}
+  .donate p{max-width:44ch; margin:0 auto 2rem; color:rgba(243,230,201,0.78); line-height:1.6;}
 
-/* the double lines */
-.av-nav::before,
-.av-nav::after {
-  content: "";
-  position: absolute;
-  left: 0; right: 0;
-  height: 2px;
-  background: rgba(0,0,0,.55);
-  border-radius: 2px;
-}
+  /* ---------- subscribe / footer ---------- */
+  footer{background:#1E1610; color:rgba(243,230,201,0.72); padding:3rem 2.4rem 2rem;}
+  .footer-inner{max-width:1120px; margin:0 auto; display:grid; grid-template-columns:1.3fr 1fr 1fr; gap:2.5rem;}
+  footer h4{font-family:'Fraunces', serif; color:var(--sand); font-size:1rem; margin-bottom:0.8rem;}
+  footer p{font-size:0.85rem; line-height:1.55;}
+  .footer-form{display:flex; gap:0.5rem; margin-top:0.8rem; flex-wrap:wrap;}
+  .footer-form input{padding:0.6rem 0.8rem; border-radius:2px; border:1px solid rgba(243,230,201,0.25); background:transparent; color:var(--sand); font-size:0.85rem; flex:1; min-width:140px;}
+  .footer-form button{padding:0.6rem 1.1rem; border-radius:2px; border:none; background:var(--rust); color:var(--cream-card); font-weight:600; font-size:0.85rem; cursor:pointer;}
+  footer ul{list-style:none; display:flex; flex-direction:column; gap:0.5rem; font-size:0.85rem;}
+  .footer-bottom{max-width:1120px; margin:2.4rem auto 0; padding-top:1.4rem; border-top:1px solid rgba(243,230,201,0.12); font-size:0.78rem; display:flex; justify-content:space-between; flex-wrap:wrap; gap:0.6rem;}
 
-.av-nav::before { top: 0; }
-.av-nav::after  { bottom: 0; }
-
-/* items are evenly distributed */
-.av-nav .av-nav-inner{
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: space-between; /* key */
-  width: 100%;
-  padding: 6px 18px;
-  gap: 0; /* important for equal spacing */
-}
-
-/* each link takes equal width */
-.av-nav .av-link{
-  flex: 1;                 /* key: equal columns */
-  text-align: center;      /* center text inside each column */
-  padding: 0;
-  font-family: 'Playfair Display', serif;
-  font-weight: 700;
-  color: rgba(0,0,0,.78);
-  text-decoration: none;
-  white-space: nowrap;     /* avoid wrapping */
-}
-
-.av-nav .av-link:hover{
-  color: rgba(0,0,0,1);
-  text-decoration: underline;
-  text-underline-offset: 4px;
-}
-/* Dropdown container */
-.av-dropdown{
-  position: relative;
-  flex: 1;              /* Projects de diğerleri gibi eşit yer kaplasın */
-  text-align: center;
-}
-
-/* Submenu box */
-.av-dropdown-menu{
-  position: absolute;
-  top: 100%;
-margin-top: 6px;
-  left: 50%;
-  transform: translateX(-50%);
-  min-width: 160px;
-  background: #e5d7ca;
-border: 1px solid rgba(0,0,0,.15);
-  border: 1px solid rgba(0,0,0,.15);
-  border-radius: 12px;
-  padding: 8px;
-  box-shadow: 0 10px 24px rgba(0,0,0,.12);
-  display: none;
-  z-index: 2000;
-}
-
-/* Show on hover (desktop) */
-.av-dropdown:hover .av-dropdown-menu{
-  display: block;
-}
-
-/* Items */
-.av-dropdown-item{
-  display: block;
-  padding: 10px 12px;
-  border-radius: 10px;
-  text-decoration: none;
-  color: rgba(0,0,0,.85);
-  font-weight: 600;
-  white-space: nowrap;
-}
-
-.av-dropdown-item:hover{
-  background: rgba(0,0,0,.06);
-}
-
-/* Optional: tiny arrow under Projects */
-.av-dropdown-menu::before{
-  content:"";
-  position:absolute;
-  top:-8px;
-  left:50%;
-  transform: translateX(-50%);
-  border-left:8px solid transparent;
-  border-right:8px solid transparent;
-  border-bottom:8px solid rgba(255,255,255,0.96);
-}
-/* Ana kapsayıcı: Tüm section'ı kaplar */
-.hero-full-section {
-  position: relative;
-  /* Videoyu kenarlardaki boşlukları aşacak şekilde genişletiyoruz */
-  width: 100vw;
-  left: 50%;
-  right: 50%;
-  margin-left: -50vw;
-  margin-right: -50vw;
-  
-  min-height: 600px;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  background: #000; /* Video yüklenene kadar siyah görünsün */
-}
-
-.hero-video-bg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: 1;
-  filter: blur(8px) brightness(0.7); /* Metinler okunsun diye biraz kararttık */
-}
-
-.hero-overlay-content {
-  position: relative;
-  z-index: 2;
-  width: 100%;
-}
-
-.mission-vision-card {
-  background: rgba(229, 215, 202, 0.85); /* Arka plan rengine sadık kaldık */
-  backdrop-filter: blur(5px);
-  padding: 3rem;
-  border-radius: 2rem;
-  max-width: 550px;
-  margin-left: auto; /* Sağa yaslar */
-  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-}
-
-
-  </style>
-  <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "Aidventurers",
-  "url": "https://aidventurers.org",
-  "logo": "https://aidventurers.org/aidventurers_logo.png",
-  "sameAs": [
-    "https://www.instagram.com/aidventurerstx/"
-  ]
-}
-</script>
-
+  @media (max-width:820px){
+    nav ul{display:none;}
+    .mv-grid, .vol-grid, .card-grid{grid-template-columns:1fr;}
+    .news-item{grid-template-columns:1fr;}
+    .gallery-grid{grid-template-columns:repeat(2,1fr);}
+    .footer-inner{grid-template-columns:1fr;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .caravan-track{transform:none !important;}
+    .reveal{opacity:1; transform:none; transition:none;}
+  }
+</style>
 </head>
-
 <body>
-  <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
-    <symbol id="check2" viewBox="0 0 16 16">
-      <path
-        d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"
-      ></path>
-    </symbol>
-    <symbol id="circle-half" viewBox="0 0 16 16">
-      <path
-        d="M8 15A7 7 0 1 0 8 1v14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"
-      ></path>
-    </symbol>
-    <symbol id="moon-stars-fill" viewBox="0 0 16 16">
-      <path
-        d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z"
-      ></path>
-      <path
-        d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.734 1.734 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.734 1.734 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.734 1.734 0 0 0 1.097-1.097l.387-1.162zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.156 1.156 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.156 1.156 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732L13.863.1z"
-      ></path>
-    </symbol>
-    <symbol id="sun-fill" viewBox="0 0 16 16">
-      <path
-        d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"
-      ></path>
-    </symbol>
-  </svg>
 
-  <div class="dropdown position-fixed bottom-0 end-0 mb-3 me-3 bd-mode-toggle">
-    <button
-      class="btn btn-bd-primary py-2 dropdown-toggle d-flex align-items-center"
-      id="bd-theme"
-      type="button"
-      aria-expanded="false"
-      data-bs-toggle="dropdown"
-      aria-label="Toggle theme (auto)"
-    >
-      <svg class="bi my-1 theme-icon-active" aria-hidden="true">
-        <use href="#circle-half"></use>
-      </svg>
-      <span class="visually-hidden" id="bd-theme-text">Toggle theme</span>
-    </button>
-    <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="bd-theme-text">
-      <li>
-        <button
-          type="button"
-          class="dropdown-item d-flex align-items-center"
-          data-bs-theme-value="light"
-          aria-pressed="false"
-        >
-          <svg class="bi me-2 opacity-50" aria-hidden="true">
-            <use href="#sun-fill"></use>
-          </svg>
-          Light
-          <svg class="bi ms-auto d-none" aria-hidden="true">
-            <use href="#check2"></use>
-          </svg>
-        </button>
-      </li>
-      <li>
-        <button
-          type="button"
-          class="dropdown-item d-flex align-items-center"
-          data-bs-theme-value="dark"
-          aria-pressed="false"
-        >
-          <svg class="bi me-2 opacity-50" aria-hidden="true">
-            <use href="#moon-stars-fill"></use>
-          </svg>
-          Dark
-          <svg class="bi ms-auto d-none" aria-hidden="true">
-            <use href="#check2"></use>
-          </svg>
-        </button>
-      </li>
-      <li>
-        <button
-          type="button"
-          class="dropdown-item d-flex align-items-center active"
-          data-bs-theme-value="auto"
-          aria-pressed="true"
-        >
-          <svg class="bi me-2 opacity-50" aria-hidden="true">
-            <use href="#circle-half"></use>
-          </svg>
-          Auto
-          <svg class="bi ms-auto d-none" aria-hidden="true">
-            <use href="#check2"></use>
-          </svg>
-        </button>
-      </li>
-    </ul>
-  </div>
-
-  <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
-    <symbol
-      id="aperture"
-      fill="none"
-      stroke="currentColor"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-      stroke-width="2"
-      viewBox="0 0 24 24"
-    >
-      <circle cx="12" cy="12" r="10"></circle>
-      <path d="M14.31 8l5.74 9.94M9.69 8h11.48M7.38 12l5.74-9.94M9.69 16L3.95 6.06M14.31 16H2.83m13.79-4l-5.74 9.94"></path>
-    </symbol>
-    <symbol id="cart" viewBox="0 0 16 16">
-      <path
-        d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"
-      ></path>
-    </symbol>
-    <symbol id="chevron-right" viewBox="0 0 16 16">
-      <path
-        fill-rule="evenodd"
-        d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"
-      ></path>
-    </symbol>
-  </svg>
-
-  <div class="container">
-    <header class="border-bottom lh-1 py-3 mb-3">
-      <div class="row flex-nowrap justify-content-between align-items-center">
-        <!-- LEFT: LOGO -->
-        <div class="col-4 d-flex align-items-center">
-          <a class="d-inline-flex align-items-center text-decoration-none" href="/" aria-label="Aidventurers Home">
-            <img src="aidventurers_logo.png" alt="Aidventurers logo" style="height:150px; width:auto;" />
-          </a>
-        </div>
-
-        <div class="col-4 text-center position-relative">
-          <a class="blog-header-logo text-body-emphasis text-decoration-none position-absolute top-50 start-50 translate-middle" href="/">
-            Aidventurers
-            <span class="d-block">Global Aid &amp; Youth Leadership</span>
-          </a>
-        </div>
-
-        <!-- RIGHT: SEARCH + SUBSCRIBE -->
-        <div class="col-4 d-flex justify-content-end align-items-center">
-          <a class="link-secondary" href="#search" aria-label="Search">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="20" height="20" fill="none"
-              stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-              class="mx-3" role="img" viewBox="0 0 24 24"
-            >
-              <title>Search</title>
-              <circle cx="10.5" cy="10.5" r="7.5"></circle>
-              <path d="M21 21l-5.2-5.2"></path>
-            </svg>
-          </a>
-
-          <a class="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#subscribeModal">
-            Subscribe
-          </a>
-        </div>
-      </div>
-    </header>
-
-<nav class="av-nav my-2" aria-label="Primary navigation">
-  <div class="av-nav-inner">
-    <a class="av-link" href="index.html">Home</a>
-
-    <div class="av-dropdown">
-      <a class="av-link av-dropdown-toggle" href="projects.html">Projects</a>
-      <div class="av-dropdown-menu" role="menu" aria-label="Projects submenu">
-        <a class="av-dropdown-item" href="projects-2025.html">2025</a>
-        <a class="av-dropdown-item" href="projects-2026.html">2026</a>
-      </div>
-    </div>
-
-    <a class="av-link" href="#news">News</a>
-    <a class="av-link" href="#volunteer-stories">Volunteer Stories</a>
-    <a class="av-link" href="#get-involved">Get Involved</a>
-    <a class="av-link" href="#about">About Us</a>
-  </div>
+<nav>
+  <a class="brand" href="#">
+    <img src="logo.png" alt="Aidventurers logo" onerror="this.style.display='none'">
+    <span>
+      <span class="brand-name">Aidventurers</span><br>
+      <span class="brand-tag">GLOBAL AID &amp; YOUTH LEADERSHIP</span>
+    </span>
+  </a>
+  <ul>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#news">News</a></li>
+    <li><a href="#volunteer">Volunteer</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#about">About</a></li>
+  </ul>
+  <a class="nav-cta" href="https://www.embracerelief.org/donation/aidventurers-group-fundraising" target="_blank">Donate</a>
 </nav>
 
+<div class="social-rail">
+  <a href="https://www.instagram.com/aidventurerstx/" target="_blank" aria-label="Instagram">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1"/></svg>
+  </a>
+  <a href="#" target="_blank" aria-label="LinkedIn">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 100 5 2.5 2.5 0 000-5zM3 9h4v12H3zM9 9h4v1.8c.7-1.1 2-2 4-2 3 0 4.5 2 4.5 5.4V21h-4v-6.1c0-1.5-.5-2.5-2-2.5-1.2 0-1.9.8-2.2 1.6-.1.3-.1.7-.1 1.1V21H9z"/></svg>
+  </a>
+  <a href="#" target="_blank" aria-label="TikTok">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 3c.4 2.2 2 3.8 4.2 4v3c-1.5 0-2.9-.4-4.2-1.2v6.4a5.4 5.4 0 11-4.6-5.3v3a2.4 2.4 0 101.9 2.3V3H14z"/></svg>
+  </a>
+</div>
 
+<section class="hero">
+  <span class="eyebrow">Youth-Led · Community-Driven</span>
+  <h1>Global aid, carried by <em>young</em> hands</h1>
+  <p>Aidventurers is a youth-led nonprofit delivering ethical, community-driven aid — healthcare access, clean water, and sustainable livelihoods — alongside local partners around the world.</p>
+  <div class="hero-ctas">
+    <a class="btn btn-primary" href="https://www.embracerelief.org/donation/aidventurers-group-fundraising" target="_blank">Donate Now</a>
+    <a class="btn btn-ghost" href="#volunteer">Get Involved</a>
   </div>
 
-  <main class="container">
-    <!-- OUR MISSION -->
-<!-- Container dışına aldık ve p-0 ekledik ki kenarlarda boşluk kalmasın -->
-<section class="container-fluid p-0 my-5">
-  <div class="hero-full-section shadow-lg">
-    <!-- Arka Plan Videosu -->
-    <video autoplay muted loop playsinline class="hero-video-bg">
-      <source src="girisvideo.mp4" type="video/mp4">
-    </video>
-
-
-    <!-- İçerik Katmanı -->
-    <div class="hero-overlay-content">
-      <!-- Satırı container içine alıyoruz ki metinler sayfa düzenine sadık kalsın -->
-      <div class="container">
-        <div class="row w-100 m-0">
-          <div class="col-lg-6 d-none d-lg-block"></div>
-          <div class="col-lg-6">
-            <div class="mission-vision-card">
-              <h2 class="blog-header-logo fs-1 mb-4">Our Mission</h2>
-              <p class="lead mb-4 fw-medium">
-                Delivering ethical, community-driven global aid through healthcare, clean water, and sustainable livelihoods.
-              </p>
-              <h2 class="blog-header-logo fs-1 mb-4">Our Vision</h2>
-              <p class="lead mb-5 fw-medium">
-                Empowering youth leadership to build and sustain resilient communities worldwide.
-              </p>
-              
-              <div class="d-grid">
-    <a href="https://www.embracerelief.org/donation/aidventurers-group-fundraising" 
-       target="_blank" 
-       class="btn btn-bd-primary btn-lg rounded-pill py-3 fw-bold shadow">
-      Donate Now
-    </a>
+  <div class="caravan-wrap">
+    <div class="horizon"></div>
+    <div class="caravan-track" id="caravanTrack"></div>
+    <div class="caravan-ground"></div>
   </div>
-            
-          </div>
-        </div>
+</section>
+
+<div class="weave-divider"></div>
+
+<section class="mission" id="about">
+  <div class="section-inner mv-grid">
+    <div class="mv-card reveal">
+      <span class="eyebrow">Our Mission</span>
+      <h2>Ethical, community-driven aid.</h2>
+      <p>Powered by student-led fundraising, our volunteers travel to communities in need to deliver healthcare access, clean water, and sustainable livelihoods — hands-on, on the ground.</p>
+    </div>
+    <div class="mv-card reveal">
+      <span class="eyebrow">Our Vision</span>
+      <h2>Youth leadership that lasts.</h2>
+      <p>Empowering the next generation to build and sustain resilient communities worldwide — turning student-led fundraising into lasting, on-the-ground impact.</p>
+    </div>
+  </div>
+</section>
+
+<section class="projects" id="projects">
+  <div class="section-inner">
+    <div class="projects-head">
+      <span class="eyebrow">Where we've worked, and where we're headed</span>
+      <h2 class="reveal">2025 · 2026 · What's next</h2>
+    </div>
+    <div class="card-grid">
+      <div class="card c1 reveal">
+        <span class="card-tag">2025 · Completed</span>
+        <h3>Uganda — Kampala &amp; Jinja</h3>
+        <p>Our student team fundraised, traveled, and volunteered on the ground to deliver water wells, fund cataract surgeries, and provide livelihood support to families.</p>
+        <ul>
+          <li>12 community water wells</li>
+          <li>30 cataract surgeries funded</li>
+          <li>100+ goats &amp; bicycles distributed</li>
+        </ul>
+      </div>
+      <div class="card c2 reveal">
+        <span class="card-tag">2026 · Upcoming, June</span>
+        <h3>Benin</h3>
+        <p>Aidventurers is preparing for our 2026 humanitarian trip to Benin — healthcare, clean water, and sustainable livelihoods projects for local communities.</p>
+        <ul>
+          <li>Mobile healthcare screenings</li>
+          <li>Clean water infrastructure</li>
+          <li>Livelihood &amp; income support</li>
+        </ul>
+      </div>
+      <div class="card c3 coming reveal">
+        <span class="card-tag">Coming Soon</span>
+        <h3>2027 destination — TBA</h3>
+        <p>We're scoping our next partner community now. Subscribe below to be the first to hear where we're headed next.</p>
       </div>
     </div>
   </div>
 </section>
 
+<div class="weave-divider"></div>
 
-
-    <div class="row mb-2">
-      <div class="col-md-6">
-        <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-          <div class="col p-4 d-flex flex-column position-static">
-            <strong class="d-inline-block mb-2 text-primary-emphasis">Haber</strong>
-            <h3 class="mb-0">Dallas Aidventurers Gençlik Grubu’ndan Uganda’ya Anlamlı Yardım Ziyareti</h3>
-            <div class="mb-1 text-body-secondary">20 Tem 2025</div>
-            <p class="card-text mb-auto">
-              3–15 Temmuz 2025’te Uganda’da 6 proje: temiz su, sağlık, eğitim ve ekonomik güçlendirme.
-              1.500 kişiye temiz su; 20 katarakt ameliyatı; 20 dikiş makinesi; 20 bisiklet ve 20 keçi desteği.
-            </p>
-            <a
-              href="https://hizmetten.com/dallas-aidventurers-genclik-grubundan-ugandaya-anlamli-yardim-ziyareti/"
-              class="icon-link gap-1 icon-link-hover stretched-link"
-              target="_blank" rel="noopener noreferrer"
-            >
-              Continue reading
-              <svg class="bi" aria-hidden="true">
-                <use xlink:href="#chevron-right"></use>
-              </svg>
-            </a>
-          </div>
-
-          <div class="col-auto d-none d-lg-block">
-            <img
-              src="hizmetten.png"
-              alt="Aidventurers Uganda projesi"
-              style="width:200px; height:250px; object-fit:cover;"
-              class="rounded"
-              loading="lazy"
-            />
-          </div>
-        </div>
+<section class="news" id="news">
+  <div class="section-inner">
+    <div class="news-head">
+      <div>
+        <span class="eyebrow">Latest</span>
+        <h2>News</h2>
       </div>
+      <a href="#" style="font-size:0.88rem; font-weight:600; color:var(--rust-deep); text-decoration:none;">View all news →</a>
     </div>
-
-    <div class="row g-5">
-      <div class="col-md-8">
-        <h3 class="pb-4 mb-4 fst-italic border-bottom">Recent Projects</h3>
-
-        <article class="blog-post">
-          <h2 class="display-6 link-body-emphasis mb-1">Uganda 2025: Wells, Cataract Surgeries & Livelihood Kits</h2>
-          <p class="blog-post-meta">July 2025 by <a href="#">Aidventurers Team</a></p>
-
-          <p>In partnership with local leaders in Kampala and Jinja, our student team delivered
-            <strong>12 water wells</strong>, funded <strong>30 cataract surgeries</strong>, and provided
-            <strong>100+ goats & bicycles</strong> to families. Funds were raised through community events in Dallas.</p>
-          <ul>
-            <li>Healthcare: mobile clinics and surgery funds</li>
-            <li>Water: community wells with maintenance training</li>
-            <li>Livelihoods: goats + bicycles for income and mobility</li>
-          </ul>
-        </article>
-
-        <nav class="blog-pagination" aria-label="Pagination">
-          <a class="btn btn-outline-primary rounded-pill" href="#">Go to Top</a>
-          <a class="btn btn-outline-secondary rounded-pill disabled" aria-disabled="true">Go to Bottom</a>
-        </nav>
+    <div class="news-item reveal">
+      <img src="hizmetten.png" alt="Aidventurers Uganda trip" onerror="this.style.opacity=0">
+      <div>
+        <div class="news-date">July 20, 2025</div>
+        <h3>Dallas Aidventurers Youth Group's Meaningful Aid Trip to Uganda</h3>
+        <p>From July 3–15, 2025, our team completed six projects across Uganda focused on clean water, healthcare, education, and economic empowerment — reaching 1,500+ people with clean water, 20 cataract surgeries, and livelihood support including sewing machines, bicycles, and goats.</p>
+        <a href="#">Continue reading →</a>
       </div>
-
-      <div class="col-md-4">
-        <div class="position-sticky" style="top: 2rem">
-          <div class="p-4">
-            <h4 class="fst-italic">Elsewhere</h4>
-
-            <!-- Instagram sneak peek -->
-            <blockquote
-              class="instagram-media"
-              data-instgrm-permalink="https://www.instagram.com/p/DPCsdjJEQbK/"
-              data-instgrm-version="14"
-              style="background:#fff; border:0; margin:0 auto; max-width:540px; width:100%;"
-            ></blockquote>
-
-            <a href="https://www.instagram.com/aidventurerstx/" target="_blank" rel="noopener"
-              class="btn btn-sm btn-outline-primary w-100 mt-2">
-              Follow us on Instagram
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </main>
-
-  <footer class="py-5 text-center text-body-secondary bg-body-tertiary">
-    <p class="mb-0"><a href="#">Back to top</a></p>
-  </footer>
-
-  <script
-    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-    crossorigin="anonymous">
-  </script>
-
-  <script async src="https://www.instagram.com/embed.js"></script>
-
-  <!-- Subscribe Modal -->
-  <div class="modal fade" id="subscribeModal" tabindex="-1" aria-labelledby="subscribeLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <form class="modal-content" action="https://formspree.io/f/xxxxabcd" method="POST">
-        <div class="modal-header">
-          <h5 class="modal-title" id="subscribeLabel">Subscribe for updates</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-
-        <div class="modal-body">
-          <div class="mb-3">
-            <label for="subEmail" class="form-label">Email address</label>
-            <input type="email" class="form-control" id="subEmail" name="email"
-              placeholder="you@example.com" required>
-          </div>
-
-          <div class="mb-3">
-            <label for="subName" class="form-label">Name (optional)</label>
-            <input type="text" class="form-control" id="subName" name="name" placeholder="Your name">
-          </div>
-
-          <input type="text" name="website" class="d-none" tabindex="-1" autocomplete="off">
-        </div>
-
-        <div class="modal-footer">
-          <button class="btn btn-primary" type="submit">Subscribe</button>
-        </div>
-      </form>
     </div>
   </div>
+</section>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      const form = document.querySelector('#subscribeModal form');
-      if (!form) return;
+<section class="volunteer" id="volunteer">
+  <div class="section-inner vol-grid">
+    <div class="reveal">
+      <span class="eyebrow">Get Involved</span>
+      <h2>Join the next trip.</h2>
+      <p>Aidventurers is run by students, for communities. Whether you can give a weekend, a skill, or a donation — there's a place for you.</p>
+      <a class="btn btn-primary" href="#">Apply to Volunteer</a>
+    </div>
+    <ul class="vol-list reveal">
+      <li><span>01</span> Join a fundraising or planning team based in Dallas.</li>
+      <li><span>02</span> Travel with us on our next aid trip and work directly with partner communities.</li>
+      <li><span>03</span> Support from home — fundraising, design, social media, or logistics.</li>
+      <li><span>04</span> Sponsor a specific project (a well, a surgery, a livelihood kit).</li>
+    </ul>
+  </div>
+</section>
 
-      form.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const fd = new FormData(form);
+<section class="gallery" id="gallery">
+  <div class="section-inner">
+    <div class="projects-head">
+      <span class="eyebrow">From the field</span>
+      <h2 class="reveal">Moments from our trips</h2>
+    </div>
+    <div class="gallery-grid">
+      <div>photo</div><div>photo</div><div>photo</div>
+      <div>photo</div><div>photo</div><div>photo</div><div>photo</div>
+    </div>
+  </div>
+</section>
 
-        try {
-          const res = await fetch(form.action, {
-            method: 'POST',
-            body: fd,
-            headers: { 'Accept': 'application/json' }
-          });
+<section class="donate">
+  <div class="section-inner">
+    <span class="eyebrow">Support the mission</span>
+    <h2 class="reveal">Every gift reaches the field</h2>
+    <p class="reveal">Donations are processed through our partner Embrace Relief and go directly toward our active projects.</p>
+    <a class="btn btn-primary" href="https://www.embracerelief.org/donation/aidventurers-group-fundraising" target="_blank">Donate Now</a>
+  </div>
+</section>
 
-          const body = await res.json().catch(() => ({}));
-          const modalBody = form.querySelector('.modal-body');
+<footer>
+  <div class="footer-inner">
+    <div>
+      <h4>Aidventurers</h4>
+      <p>A youth-led nonprofit delivering ethical, community-driven global aid: healthcare, clean water, and sustainable livelihoods.</p>
+      <div class="footer-form">
+        <input type="email" placeholder="Email address">
+        <button>Subscribe</button>
+      </div>
+    </div>
+    <div>
+      <h4>Explore</h4>
+      <ul>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#news">News</a></li>
+        <li><a href="#volunteer">Volunteer</a></li>
+        <li><a href="#about">About Us</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Connect</h4>
+      <ul>
+        <li><a href="https://www.instagram.com/aidventurerstx/" target="_blank">Instagram</a></li>
+        <li><a href="#" target="_blank">LinkedIn</a></li>
+        <li><a href="#" target="_blank">TikTok</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Aidventurers. Youth-led, community-driven.</span>
+    <span>Dallas, TX</span>
+  </div>
+</footer>
 
-          if (res.ok) {
-            form.reset();
-            modalBody.innerHTML = '<div class="alert alert-success mb-0">Thanks! Please check your inbox to confirm your subscription.</div>';
-          } else {
-            const msg = body.errors?.map(e => e.message).join('<br>') || 'Something went wrong. Please try again.';
-            modalBody.insertAdjacentHTML('beforeend', `<div class="alert alert-danger mt-3">${msg}</div>`);
-          }
-        } catch (err) {
-          const modalBody = form.querySelector('.modal-body');
-          modalBody.insertAdjacentHTML('beforeend', '<div class="alert alert-danger mt-3">Network error. Please try again.</div>');
-        }
-      });
-    });
-  </script>
-  <script>
-document.addEventListener('DOMContentLoaded', () => {
-  const dd = document.querySelector('.av-dropdown');
-  const toggle = document.querySelector('.av-dropdown-toggle');
-  const menu = document.querySelector('.av-dropdown-menu');
-  if (!dd || !toggle || !menu) return;
+<script>
+  const track = document.getElementById('caravanTrack');
 
-  // only for touch-ish screens
-  let opened = false;
+  // Build a chain of overlapping figures echoing the logo's linked-hands motif
+  const bodyColors = ['#1B3A5C','#1E7A86','#C89B2E','#E0752F','#B23327','#6B4226','#F2B705'];
+  const headColors = ['#211810','#6B4226','#1B3A5C','#211810','#1E7A86','#211810','#B23327'];
+  let figuresHTML = '';
+  for(let i = 0; i < 26; i++){
+    const body = bodyColors[i % bodyColors.length];
+    const head = headColors[(i + 2) % headColors.length];
+    figuresHTML += `<div class="figure-wrap"><svg viewBox="0 0 40 74" xmlns="http://www.w3.org/2000/svg">
+      <path d="M20 72C9 72 3 61 3 48C3 36 11 27 20 15C29 27 37 36 37 48C37 61 31 72 20 72Z" fill="${body}"/>
+      <circle cx="20" cy="10" r="7" fill="${head}"/>
+    </svg></div>`;
+  }
+  track.innerHTML = figuresHTML;
 
-  toggle.addEventListener('click', (e) => {
-    const isSmall = window.matchMedia('(max-width: 768px)').matches;
-    if (!isSmall) return; // desktop uses hover
-
-    if (!opened) {
-      e.preventDefault(); // first tap opens menu
-      menu.style.display = 'block';
-      opened = true;
-    }
-    // second tap follows link naturally
+  let ticking = false;
+  function updateCaravan(){
+    const scrolled = window.scrollY;
+    const offset = -(scrolled * 0.15) % 260;
+    track.style.transform = `translateX(${offset - 30}px)`;
+    ticking = false;
+  }
+  window.addEventListener('scroll', () => {
+    if(!ticking){ requestAnimationFrame(updateCaravan); ticking = true; }
   });
+  updateCaravan();
 
-  // close when clicking outside
-  document.addEventListener('click', (e) => {
-    if (!dd.contains(e.target) && opened) {
-      menu.style.display = 'none';
-      opened = false;
-    }
-  });
-});
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, {threshold:0.15});
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 </script>
 
 </body>
